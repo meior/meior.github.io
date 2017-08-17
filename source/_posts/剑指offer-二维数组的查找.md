@@ -17,31 +17,36 @@ tags: [Array, Binary Search, JavaScript]
 ## 程序代码
 代码采用JavaScript编写，运行在V8 6.0.0环境中。
 {%codeblock lang:javascript%}
+/**
+ * 在二维有序数组中查找元素
+ * 数组每一行右递增，每一列下递增
+ * @param  {Number}  target 查找目标
+ * @param  {Array}   array  查找数组
+ * @return {Boolean}        是否找到目标
+ */
 function find(target, array) {
-  // 从右上角开始
+  // 从矩阵右上角开始
   let i = 0;
   let j = array[i].length - 1;
 
   // 一直搜索到左下角
   while (i < array.length && j >= 0) {
     if (array[i][j] < target) {
-      // 小于目标元素，删掉一行
-      i += 1;
+      // 小于目标元素，删除一行
+      i++;
     } else if (array[i][j] > target) {
       // 大于目标元素，删除一列
-      j -= 1;
+      j--;
     } else {
-      // 找到目标元素
+      // 找到目标
       return true;
     }
   }
-
   return false;
 }
 
-const arr = [[1, 2], [3, 4], [5, 6]];
-console.log(find(5, arr));    // Output: true
-console.log(find(7, arr));    // Output: false
+const arr = [[1, 2, 8, 9], [2, 4, 9, 12], [4, 7, 10, 13], [6, 8, 11, 15]];
+console.log(find(7, arr), find(5, arr));  // Output: true false
 {%endcodeblock%}
 
 ## 时间复杂度
