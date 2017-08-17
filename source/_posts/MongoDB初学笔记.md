@@ -45,8 +45,7 @@ db.createUser({user: 'sa', pwd: 'admin', roles: [{role: 'userAdminAnyDatabase', 
 6. 将两个命令提示符窗口都关闭，编辑`mongoDB.bat`，在末尾加上`" -auth"`参数以启用用户验证。
 
 ## 简单使用
-首先运行之前创建的bat脚本启动mongoDB服务，在另一个cmd窗口通过mongo命令来执行简单的增删查改操作。
-这里不再新建另外的数据库，操作均在admin数据库中进行。首先使用`sa`账户登录admin数据库：
+首先运行之前创建的bat脚本启动mongoDB服务，在另一个cmd窗口通过mongo命令来执行简单的增删查改操作。这里不再新建另外的数据库，操作均在admin数据库中进行。首先使用`sa`账户登录admin数据库：
 {%codeblock lang:cmd%}
 mongo admin -usa -padmin
 {%endcodeblock%}

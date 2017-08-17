@@ -25,8 +25,7 @@ app/
     filters/
         CapatalizeFilter.js
 {%endcodeblock%}
-这样的布局，尤其是对那些有`Rails`背景的人来说，看起来挺合理。可是当app变得越来越庞大的时候，这样的布局结构会导致每次都会打开一堆文件夹。无论你是用`Sublime`，`Visual Studio`，还是`Vim with Nerd Tree`，每次都要花上很多时间滑动滚动条浏览这个目录树来查找文件。
-如果我们根据每个文件隶属的功能模块来对文件分组，而不是根据它隶属的层：
+这样的布局，尤其是对那些有`Rails`背景的人来说，看起来挺合理。可是当app变得越来越庞大的时候，这样的布局结构会导致每次都会打开一堆文件夹。无论你是用`Sublime`，`Visual Studio`，还是`Vim with Nerd Tree`，每次都要花上很多时间滑动滚动条浏览这个目录树来查找文件。如果我们根据每个文件隶属的功能模块来对文件分组，而不是根据它隶属的层：
 <!--more-->
 {%codeblock lang:javascript%}
 app/
@@ -77,8 +76,7 @@ var app = angular.module('app',[]);app.controller('MainCtrl', function($scope, $
         console.log($scope);
     }, 1000);});
 {%endcodeblock%}
-这里，很清楚的是MainCtrl依赖于$scope和$timeout。
-直到你准备投入生产并压缩你的代码。使用`UglifyJS`，上面的例子会变成：
+这里，很清楚的是MainCtrl依赖于$scope和$timeout。直到你准备投入生产并压缩你的代码。使用`UglifyJS`，上面的例子会变成：
 {%codeblock lang:javascript%}
 var app=angular.module("app",[]);
 app.controller("MainCtrl",function(e,t){t(function(){console.log(e)},1e3)})
@@ -96,9 +94,7 @@ app.controller("MainCtrl",["$scope","$timeout",function(e,t){t(function(){consol
 {%endcodeblock%}
 
 ### 全局依赖
-通常在写AngularJS应用时会有一个对象作为依赖绑定到全局作用域中。这意味着它在任何AngularJS的代码中都可用，但这打破了依赖注入模型同时带来一些问题，特别是在测试中。
-AngularJS把这些全局变量封装到模块中，这样它们可以像标准AngularJS模块一样被注入。
-[Underscorejs](http://underscorejs.org/)是很棒的库，它把JavaScript代码简化成了函数模式，并且它可以被转化成一个模块：
+通常在写AngularJS应用时会有一个对象作为依赖绑定到全局作用域中。这意味着它在任何AngularJS的代码中都可用，但这打破了依赖注入模型同时带来一些问题，特别是在测试中。AngularJS把这些全局变量封装到模块中，这样它们可以像标准AngularJS模块一样被注入。[Underscorejs](http://underscorejs.org/)是很棒的库，它把JavaScript代码简化成了函数模式，并且它可以被转化成一个模块：
 {%codeblock lang:javascript%}
 var underscore = angular.module('underscore', []);underscore.factory('_', function() {
   return window._; //Underscore must already be loaded on the page});var app = angular.module('app', ['underscore']);app.controller('MainCtrl', ['$scope', '_', function($scope, _) {
@@ -108,12 +104,13 @@ var underscore = angular.module('underscore', []);underscore.factory('_', functi
      
       init();}]);
 {%endcodeblock%}
-它允许应用继续用AngularJS依赖注入的风格，也让underscore在测试的时候被交换出来。
-这或许看上去不重要，像是一个无关紧要的工作，但如果你的代码正在使用`use strict`（应该使用），那么这就变得有必要了。 
+它允许应用继续用AngularJS依赖注入的风格，也让underscore在测试的时候被交换出来。这或许看上去不重要，像是一个无关紧要的工作，但如果你的代码正在使用`use strict`（应该使用），那么这就变得有必要了。 
 
 ## 控制器膨胀
 控制器是AngularJS应用中的肉和番茄。它很简单，特别是开始的时候，在控制器中放入过多的逻辑。控制器不应该做任何DOM操作或者有DOM选择器，这应该由使用`ngModel`的指令（directives）做的事。同样地，业务逻辑应该在服务（services）中，而不是 控制器。
+
 数据也应该被存在服务（services）中，除非它已经和$scope关联。服务（services）是留存于整个应用生命周期的个体，同时控制器在应用各阶段间都是暂态的。如果数据被存在控制器中，那么当它被重新实例化的时候，就需要从其他地方抓取。即使数据被存储在localStorage中，获取数据也要比从JavaScript变量中获取要慢几个数量级。
+
 AngularJS在遵从简单责任原则（SRP）时工作地最好。如果控制器是视图和模型的协调者，那么它拥有的逻辑应该被最小化。这将使得测试变的更加简单。
 
 ## Service和Factory的区别
@@ -128,6 +125,7 @@ function service(name, constructor) {
   }
 {%endcodeblock%}
 从源码上看显然service函数只是调用factory函数，然后factory函数再调用provider函数。事实上，value、constant和decorator也是AngularJS提供的对provider的封装，但对它们使用场景不会有这种困惑，并且文档描述也非常清晰。
+
 那么Service仅仅是单纯的调用了一次factory函数吗？重点在`$injector.instantiate`中。在这个函数里service会接收一个由$injector使用new关键字去实例化的一个构造器对象。下面是完成同样功能的一个service和一个factory。
 {%codeblock lang:javascript%}
 var app = angular.module('app',[]);
@@ -145,6 +143,7 @@ app.factory('helloWorldFactory', function(){
     }});
 {%endcodeblock%}
 当helloWorldService或者helloWorldFactory中的任何一个注入到controller里面，他们都有一个返回字符串"Hello World"的名称为hello方法。这个service的构造函数只在声明时被实例化一次，并且在这个factory对象每次被注入时各种互相引用，但这个factory还是只是被实例化了一次。**_所有的 providers 都是单例的。_**
+
 既然都完成同样的功能，为什么会有这两种格式存在？factory比service略微更灵活一些，因为它们可以使用new关键字返回函数（原文：Factories offer slightly more flexibility than services because they can return functions which can then be new'd）。在其他地方，从面向对象编程的工厂模式来说。一个factory可以是一个用于创建其他对象的对象。
 {%codeblock lang:javascript%}
 app.factory('helloFactory', function() {
@@ -188,13 +187,13 @@ app.factory('privateFactory', function(){
 在这个例子中privateFactory含有一个不能被外部访问的私有privateFunc函数。这种使用方式services也可以实现，但是使用Factory代码结构显得更加清晰。
 
 ## 不会使用 Batarang
-[Batarang](https://chrome.google.com/webstore/detail/AngularJS-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en)是用于开发和调试AngularJS应用的一个优秀的chrome浏览器插件。
-Batarang提供了模型浏览，可以查看Angular内部哪些模型已经绑定到作用域（scopes）。可以用于需要在运行时查看指令中的隔离作用域（isolate scopes）绑定的值。
-Batarang还提供了依赖关系图。 对于引入一个未测试的代码库， 这个工具可以快速确定哪些services应该得到更多的关注。
+[Batarang](https://chrome.google.com/webstore/detail/AngularJS-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en)是用于开发和调试AngularJS应用的一个优秀的chrome浏览器插件。Batarang提供了模型浏览，可以查看Angular内部哪些模型已经绑定到作用域（scopes）。可以用于需要在运行时查看指令中的隔离作用域（isolate scopes）绑定的值。Batarang还提供了依赖关系图。 对于引入一个未测试的代码库， 这个工具可以快速确定哪些services应该得到更多的关注。
+
 最后，Batarang提供了性能分析。AngularJS虽然是高性能开箱即用，但是随着应用自定义指令和复杂的业务逻辑的增长，有时候会感到页面不够流畅。使用Batarang的性能分析工具可以很方便的查看哪些functions在`digest`周期中占用了更多的时间。这个工具还可以显示出整个监控树（full watch tree），当页面有太多的监控器（watch）时，这个功能就显得有用了。
 
 ## 太多的watchers
 正如上文中提到的，在外部AngularJS是很不错的。因为在一个循环消化中需要进行dirty检查，一旦watcher的数目超过2000，循环会出现很明显的问题。（2000仅是一个参考数，在1.3版本中AngularJS对循环消化有更为严谨的控制，关于这个[Aaron Graye](http://www.aaron-gray.com/delaying-the-digest-cycle-in-AngularJS/)有较为详细的叙述）
+
 这个IIFE（快速响应函数）可输出当前本页中的watcher的数目，只需将其复制到console即可查看详情。IIFE的来源跟Jared关于[StackOverflow](http://stackoverflow.com/questions/18499909/how-to-count-total-number-of-watches-on-a-page)的回答是类似的。
 {%codeblock lang:javascript%}
 (function () { 
@@ -217,13 +216,12 @@ Batarang还提供了依赖关系图。 对于引入一个未测试的代码库�
      
     console.log(watchers.length);})();
 {%endcodeblock%}
-使用这个，可以从Batarang的效率方面来决定watcher及watch tree的数目，可以看到在哪些地方顾在或哪些地方没有改变的数据有一个watch。
-当有数据没有变化时，但在Angular中又想让它成为模板，可以考虑使用[bindonce](https://github.com/Pasvaz/bindonce)。Bindonce在Angular中仅是一个可能使用模板的指令，但没有增加watch的数目。
+使用这个，可以从Batarang的效率方面来决定watcher及watch tree的数目，可以看到在哪些地方顾在或哪些地方没有改变的数据有一个watch。当有数据没有变化时，但在Angular中又想让它成为模板，可以考虑使用[bindonce](https://github.com/Pasvaz/bindonce)。Bindonce在Angular中仅是一个可能使用模板的指令，但没有增加watch的数目。
 
 ## 审视$scope
 JavaScript的基于原型的继承和基于类的继承在一些细微的方面是不同的。通常这不是问题，但是差别往往会在使用$scope时出现。在AngularJS中每一个$scope都从它的父$scope继承过来，最高层是`$rootScope`。（$scope在指令中表现的有些不同，指令中的隔离作用域仅继承那些显式声明的属性。）
-从父级那里分享数据对于原型继承来说并不重要。不过如果不小心的话，会遮蔽父级$scope的属性。
-我们想在导航栏上呈现一个用户名，然后进入登陆表单。
+
+从父级那里分享数据对于原型继承来说并不重要。不过如果不小心的话，会遮蔽父级$scope的属性。我们想在导航栏上呈现一个用户名，然后进入登陆表单。
 {%codeblock lang:html%}
 <div ng-controller="navCtrl">
    <span>{{user}}</span>
@@ -233,8 +231,8 @@ JavaScript的基于原型的继承和基于类的继承在一些细微的方面�
    </div></div>
 {%endcodeblock%}
 考你下：当用户在设置了ngModel的文本框中输入了值，哪个模板会被更新？是navCtrl，loginCtrl还是两者？
-如果你选loginCtrl，那么你可能对原型继承的机理比较了解了。当寻找字面值时，原型链并没有被涉及。如果navCtrl要被更新的话，那么查找原型链是必要的。当一个值时对象的时候就会发生这些。（记住在JavaScript中，函数、数组合对象都算作对象）
-所以想要获得期望的效果就需要在navCtrl上创建一个对象可以被loginCtrl引用。
+
+如果你选loginCtrl，那么你可能对原型继承的机理比较了解了。当寻找字面值时，原型链并没有被涉及。如果navCtrl要被更新的话，那么查找原型链是必要的。当一个值时对象的时候就会发生这些。（记住在JavaScript中，函数、数组合对象都算作对象）所以想要获得期望的效果就需要在navCtrl上创建一个对象可以被loginCtrl引用。
 {%codeblock lang:html%}
 <div ng-controller="navCtrl">
    <span>{{user.name}}</span>
@@ -248,22 +246,24 @@ JavaScript的基于原型的继承和基于类的继承在一些细微的方面�
 
 ## 手工测试
 虽然测试驱动开发可能不是每一个开发者都喜欢的开发方式，不过每次开发者去检查他们的代码是否工作或开始砸东西时，他们正在做手工测试。
+
 没有理由不去测试一个AngularJS应用。AngularJS从一开始就是被设计地易于测试的。依赖注入和`ngMock`模块就是证据。核心团队开发了一些工具来讲测试带到另一个级别。
 ### Protractor
-单元测试是一组测试集的基本元素，但随着应用复杂性的提高，集成测试会引出更多实际问题。幸运地是AngularJS核心团队提供了必要的工具。
-“我们构建了Protractor，一个端对端的测试运行工具，模拟用户交互，帮助你验证你的Angular应用的运行状况。”
+单元测试是一组测试集的基本元素，但随着应用复杂性的提高，集成测试会引出更多实际问题。幸运地是AngularJS核心团队提供了必要的工具。“我们构建了Protractor，一个端对端的测试运行工具，模拟用户交互，帮助你验证你的Angular应用的运行状况。”
+
 Protractor使用Jasmine测试框架来定义测试。Protractor为不同的页面交互提供一套健壮的API。
 有其他的端对端工具，不过Protractor有着自己的优势，它知道怎么和AngularJS的代码一起运行，特别是面临$digest循环的时候。
 ### Karma
 一旦使用Protractor写好了集成测试，测试需要被运行起来。等待测试运行特别是集成测试，会让开发者感到沮丧。AngularJS核心团队也感到了这个痛苦并开发了[Karma](http://karma-runner.github.io/0.12/index.html)。
+
 Karma是一个JavaScript测试运行工具，可以帮助你关闭反馈循环。Karma可以在特定的文件被修改时运行测试，它也可以在不同的浏览器上并行测试。不同的设备可以指向Karma服务器来覆盖实际场景。
 
 ## jQuery的使用
 jQuery是个很不错的类库，它将跨平台开发标准化，在现代网页开发中具有很重要的地位。虽然jQuery拥有许多强大的功能，但是他的设计理念却与AngularJS大相径庭。
-AngularJS是用来开发应用框架的，jQuery则是一个用来简化HTML文档对象遍历和操作，事件处理，动画以及`Ajax`使用的类库而已，这是它们俩在本质上的区别。AngularJS侧重点在于应用的架构，而非仅仅是补充HTML网页的功能。
-如文档所述，AngularJS可以让你根据应用的需要对HTML进一步扩展。所以，如果想要深入的了解AngularJS应用开发，**_就不应该再继续抱着jQuery的大腿_**，jQuery只会把程序员的思维方式限制在现有的HTML标准里头.
-DOM操作应该出现在指令中，但这并不意味着一定要使用jQuery包装集。在使用jQuery前要考虑到一些功能AngularJS已经提供了。指令建立于相互之间，并可以创建有用的工具。
-总有一天，使用jQuery库是必要的，不过从一开始就引入它无疑是一个错误。
+
+AngularJS是用来开发应用框架的，jQuery则是一个用来简化HTML文档对象遍历和操作，事件处理，动画以及`Ajax`使用的类库而已，这是它们俩在本质上的区别。AngularJS侧重点在于应用的架构，而非仅仅是补充HTML网页的功能。如文档所述，AngularJS可以让你根据应用的需要对HTML进一步扩展。所以，如果想要深入的了解AngularJS应用开发，**_就不应该再继续抱着jQuery的大腿_**，jQuery只会把程序员的思维方式限制在现有的HTML标准里头。
+
+DOM操作应该出现在指令中，但这并不意味着一定要使用jQuery包装集。在使用jQuery前要考虑到一些功能AngularJS已经提供了。指令建立于相互之间，并可以创建有用的工具。总有一天，使用jQuery库是必要的，不过从一开始就引入它无疑是一个错误。
 
 ## 总结
 AngularJS是一个很不错的框架，并且和它的社区一起发展着。符合习惯的AngularJS仍旧是一个正在发展的概念，但希望以上这些对于规划一个AngularJS应用时会出现的陷阱可以被避免。

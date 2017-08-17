@@ -5,9 +5,10 @@ categories: JavaScript
 tags: [AngularJS]
 ---
 在AngularJS里面，`services`作为单例对象在需要到的时候被创建，只有在应用生命周期结束的时候(关闭浏览器)才会被清除。而`controllers`在不需要的时候就会被销毁了。这就是为什么使用controllers在应用里面传递数据不可靠的原因，特别是使用routing的时候。就是说services在应用的controllers、 方法、数据之前起到了很关键的作用。
+
 现在我们开始看怎么创建service。每个方法我们都会看到下面两个一样的参数：
-* name-我们要定义的service的名字；
-* function-service方法；
+- name-我们要定义的service的名字；
+- function-service方法；
   他们都创建了相同的底层对象类型。实例化后，他们都创建了一个service，这些对象没有什么功能上的差别。
 
 ## factory()
@@ -42,6 +43,7 @@ angular.module('myApp')
 {%endcodeblock%}
 ### 什么时候使用factory()方法
 在service里面当我们仅仅需要的是一个方法和数据的集合且不需要处理复杂的逻辑的时候，factory()是一个非常不错的选择。
+
 **_注意：需要使用.config()来配置service的时候不能使用factory()方法。_**
 
 ## service()
@@ -74,7 +76,8 @@ angular.module('myApp')
 });
 {%endcodeblock%}
 ### 什么时候适合使用service()方法
-service()方法很适合使用在功能控制比较多的service里面
+service()方法很适合使用在功能控制比较多的service里面。
+
 **_注意：需要使用.config()来配置service的时候不能使用service()方法。_**
 
 ## provider()

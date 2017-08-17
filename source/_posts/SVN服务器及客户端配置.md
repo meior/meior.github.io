@@ -8,8 +8,9 @@ tags: [SVN]
 
 ## 服务端配置
 服务端我们使用Visual Svn Server，可以进入visualsvn官网下载最新版（目前最新版为[1.9.2](https://www.visualsvn.com/server/download/)），下载完成后，一路默认安装(选择默认端口时可能需要修改)。
-<!--more-->
+
 首先来修改Network设置，在软件主界面右键点击"VisualSVN Server(Local)"，选择"properties"，选择"Network"，在"server name"中填入本机ip地址，可通过ipconfig命令查看提供商分配的公网ip。可以选择性勾选使用https加密链接：
+<!--more-->
 ![svn服务器配置1](http://7xs1tt.com1.z0.glb.clouddn.com/blog/SVN%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/pic1.png)
 下面来创建用户，右键点击"Users"，选择"Create User"，在下面填入用户名及密码，用于在提交和下载代码时验证，可添加多个用户：
 ![svn服务器配置2](http://7xs1tt.com1.z0.glb.clouddn.com/blog/SVN%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/pic2.png)
@@ -25,6 +26,7 @@ tags: [SVN]
 
 ## 客户端配置
 下面我们开始客户端配置介绍。客户端使用TortoiseSVN，也就是我们通常所说的小乌龟，可进入官网下载最新版(目前最新版为[1.9.2](http://tortoisesvn.net/downloads.html))。
+
 安装过程默认就好了。我们在本地新建一个"TortoiseSVN"文件夹用于存放svn上传下载源代码，在里面新建项目文件夹，命名要与服务端项目库名称一致，否则它默认又会在该文件下新建一个项目文件夹。下面我们开始上传项目代码，右键该文件夹，选择"SVN Checkout"，在URL一栏填入项目库链接地址，点击ok进行初始化：
 ![svn服务器配置8](http://7xs1tt.com1.z0.glb.clouddn.com/blog/SVN%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/pic8.png)
 会提示输入用户及密码，我们输入服务端设置的用户及密码即可，勾选记住以便以后验证。初始化完毕后，我们就可以进行上传了，首先将所有项目代码都复制到该目录下，不需要上传的文件或文件夹可以右键选择TorToiseSVN -> Unversion and add to igore list。配置完后开始上传，右键项目文件夹，选择"SVN Commit"进行提交，勾选所有项目文件并点击ok：
