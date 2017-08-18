@@ -2,7 +2,7 @@
 title: 剑指offer-数值的整数次方
 date: 2016-02-12 14:40:31
 categories: 算法
-tags: [Bitwise, JavaScript]
+tags: [Bitwise, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

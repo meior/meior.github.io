@@ -2,7 +2,7 @@
 title: 剑指offer-矩形覆盖
 date: 2016-01-27 09:05:37
 categories: 算法
-tags: [Fibonacci, Recursion, JavaScript]
+tags: [Fibonacci, Recursion, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

@@ -2,7 +2,7 @@
 title: 剑指offer-变态跳台阶
 date: 2016-01-24 22:33:41
 categories: 算法
-tags: [Recursion, JavaScript]
+tags: [Recursion, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

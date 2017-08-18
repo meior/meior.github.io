@@ -2,7 +2,7 @@
 title: 剑指offer-二维数组的查找
 date: 2016-01-20 18:23:19
 categories: 算法
-tags: [Array, Binary Search, JavaScript]
+tags: [Array, Binary Search, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

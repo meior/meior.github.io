@@ -2,7 +2,7 @@
 title: 剑指offer-跳台阶
 date: 2016-01-23 22:11:51
 categories: 算法
-tags: [Fibonacci, Recursion, JavaScript]
+tags: [Fibonacci, Recursion, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

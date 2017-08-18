@@ -2,7 +2,7 @@
 title: 剑指offer-旋转数组的最小数字
 date: 2016-02-05 18:43:43
 categories: 算法
-tags: [Array, Binary Search, JavaScript]
+tags: [Array, Binary Search, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 

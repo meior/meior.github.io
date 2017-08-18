@@ -2,7 +2,7 @@
 title: 剑指offer-重建二叉树
 date: 2016-01-30 21:16:16
 categories: 算法
-tags: [Binary Tree, JavaScript]
+tags: [Binary Tree, Interview]
 ---
 剑指offer上的题目，在[牛客网](https://www.nowcoder.com/)上刷题通过，下面记录相关思路。
 
