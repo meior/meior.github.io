@@ -1,10 +1,14 @@
 {
-  "name": "hexo-site",
+  "name": "meior.github.io",
   "version": "0.0.2",
   "description": "My personal website build with Hexo",
   "private": true,
   "hexo": {
     "version": "3.3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:meior/meior.github.io.git"
   },
   "keywords": [
     "hexo",
@@ -13,6 +17,12 @@
     "blog",
     "github-pages"
   ],
+  "author": "meior <494579004@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meior/meior.github.io/issues"
+  },
+  "homepage": "https://github.com/meior/meior.github.io#readme",
   "dependencies": {
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.3.1",
