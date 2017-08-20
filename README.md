@@ -7,39 +7,39 @@ My personal website, recording some program notes and experiences. Default branc
 
 ## Installation
 Download the hexo branch(default):
-```sh
+```bash
 $ git clone git@github.com:meior/meior.github.io.git
 ```
 
 Install dependencies:
-```sh
+```bash
 $ cd meior.github.io
 $ npm install
 ```
 
 Start the server at localhost for preview in time(unnecessary):
-```sh
+```bash
 $ hexo s
 ```
 
 ## Post & Deploy
 Create a new article:
-```sh
+```bash
 $ hexo n articleName
 ```
 
 After editing, generate the static pages of website:
-```sh
+```bash
 $ hexo g
 ```
 
 Deploy them on Github or other remote repositories:
-```sh
+```bash
 $ hexo d
 ```
 
 ## Push updates
-```sh
+```bash
 $ git add .
 $ git commit -m "new post"
 $ git push origin hexo
