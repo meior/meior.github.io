@@ -13,7 +13,7 @@ $ git clone git@github.com:meior/meior.github.io.git
 
 Install dependencies:
 ```sh
-$ cd meior.github.io.git
+$ cd meior.github.io
 $ npm install
 ```
 
@@ -47,10 +47,10 @@ $ git push origin hexo
 
 ## Components
 Powered by:
-- node.js
-- hexo
-- hexo-theme-next
+- [node.js](https://nodejs.org)
+- [hexo](https://hexo.io)
+- [hexo-theme-next](http://theme-next.iissnan.com)
 
 Third-party services:
-- disqus
-- leancloud
+- [disqus](https://disqus.com)
+- [leancloud](https://leancloud.cn)
