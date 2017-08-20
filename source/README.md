@@ -7,10 +7,10 @@ My personal website, recording some program notes and experiences. This branch `
 
 ## Components
 Powered by:
-- node.js
-- hexo
-- hexo-theme-next
+- [node.js](https://nodejs.org)
+- [hexo](https://hexo.io)
+- [hexo-theme-next](http://theme-next.iissnan.com)
 
 Third-party services:
-- disqus
-- leancloud
+- [disqus](https://disqus.com)
+- [leancloud](https://leancloud.cn)
