@@ -4,7 +4,7 @@
   "description": "My personal website build with Hexo",
   "private": true,
   "hexo": {
-    "version": "3.3.8"
+    "version": "3.4.2"
   },
   "repository": {
     "type": "git",
