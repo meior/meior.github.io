@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="AngularJS,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="AngularJS是如今最受欢迎的JS框架之一，简化开发过程是它的目标之一，这使得它非常适合于元型较小的apps的开发，但也扩展到具有全部特征的客户端应用的开发。易于开发、较多的特征及较好的效果导致了较多的应用，伴随而来的是一些陷阱。本文列举了AngularJS的一些共同的易于也问题的地方，尤其是在开发一个app的时候。 MVC目录结构AngularJS是一个缺乏较好的term的MVC框架，其mo">
+<meta name="keywords" content="AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转]AngularJS开发者最常犯的10个错误">
+<meta property="og:url" content="https://github.com/meior/2015/11/28/AngularJS开发者最常犯的10个错误/index.html">
+<meta property="og:site_name" content="MeiYL&#39;s Blog">
+<meta property="og:description" content="AngularJS是如今最受欢迎的JS框架之一，简化开发过程是它的目标之一，这使得它非常适合于元型较小的apps的开发，但也扩展到具有全部特征的客户端应用的开发。易于开发、较多的特征及较好的效果导致了较多的应用，伴随而来的是一些陷阱。本文列举了AngularJS的一些共同的易于也问题的地方，尤其是在开发一个app的时候。 MVC目录结构AngularJS是一个缺乏较好的term的MVC框架，其mo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-09T08:27:17.625Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转]AngularJS开发者最常犯的10个错误">
+<meta name="twitter:description" content="AngularJS是如今最受欢迎的JS框架之一，简化开发过程是它的目标之一，这使得它非常适合于元型较小的apps的开发，但也扩展到具有全部特征的客户端应用的开发。易于开发、较多的特征及较好的效果导致了较多的应用，伴随而来的是一些陷阱。本文列举了AngularJS的一些共同的易于也问题的地方，尤其是在开发一个app的时候。 MVC目录结构AngularJS是一个缺乏较好的term的MVC框架，其mo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/meior/2015/11/28/AngularJS开发者最常犯的10个错误/">
+
+
+
+
+
+  <title>[转]AngularJS开发者最常犯的10个错误 | MeiYL's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MeiYL's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/meior/2015/11/28/AngularJS开发者最常犯的10个错误/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MeiYL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MeiYL's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[转]AngularJS开发者最常犯的10个错误</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-28T12:38:51-05:00">
+                2015-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/11/28/AngularJS开发者最常犯的10个错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/28/AngularJS开发者最常犯的10个错误/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/11/28/AngularJS开发者最常犯的10个错误/" class="leancloud_visitors" data-flag-title="[转]AngularJS开发者最常犯的10个错误">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>AngularJS是如今最受欢迎的JS框架之一，简化开发过程是它的目标之一，这使得它非常适合于元型较小的apps的开发，但也扩展到具有全部特征的客户端应用的开发。易于开发、较多的特征及较好的效果导致了较多的应用，伴随而来的是一些陷阱。本文列举了AngularJS的一些共同的易于也问题的地方，尤其是在开发一个app的时候。</p>
+<h2 id="MVC目录结构"><a href="#MVC目录结构" class="headerlink" title="MVC目录结构"></a>MVC目录结构</h2><p>AngularJS是一个缺乏较好的term的MVC框架，其models不像<code>backbone.js</code>中那样做为一个框架来定义，但其结构模式仍匹配的较好。当在一个MVC框架中作业时，基于文件类型将文件组合在一起是其共同的要求：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">templates/</span><br><span class="line">    _login.html</span><br><span class="line">    _feed.html</span><br><span class="line">app/</span><br><span class="line">    app.js</span><br><span class="line">    controllers/</span><br><span class="line">        LoginController.js</span><br><span class="line">        FeedController.js</span><br><span class="line">    directives/</span><br><span class="line">        FeedEntryDirective.js</span><br><span class="line">    services/</span><br><span class="line">        LoginService.js</span><br><span class="line">        FeedService.js</span><br><span class="line">    filters/</span><br><span class="line">        CapatalizeFilter.js</span><br></pre></td></tr></table></figure><br>这样的布局，尤其是对那些有<code>Rails</code>背景的人来说，看起来挺合理。可是当app变得越来越庞大的时候，这样的布局结构会导致每次都会打开一堆文件夹。无论你是用<code>Sublime</code>，<code>Visual Studio</code>，还是<code>Vim with Nerd Tree</code>，每次都要花上很多时间滑动滚动条浏览这个目录树来查找文件。如果我们根据每个文件隶属的功能模块来对文件分组，而不是根据它隶属的层：<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app/</span><br><span class="line">    app.js</span><br><span class="line">    Feed/</span><br><span class="line">        _feed.html</span><br><span class="line">        FeedController.js</span><br><span class="line">        FeedEntryDirective.js</span><br><span class="line">        FeedService.js</span><br><span class="line">    Login/</span><br><span class="line">        _login.html</span><br><span class="line">        LoginController.js</span><br><span class="line">        LoginService.js</span><br><span class="line">    Shared/</span><br><span class="line">        CapatalizeFilter.js</span><br></pre></td></tr></table></figure><br>那么查找某个功能模块的文件就要容易得多，自然可以提高开发的速度。也许把html文件跟js文件放在混合放在一起做法不是每个人都能认同。但是起码它省下宝贵的时间。</p>
+<h2 id="模块分组"><a href="#模块分组" class="headerlink" title="模块分组"></a>模块分组</h2><p>一开始就将主模块中所有子模块展示出来是通常的做法。但是开始做一个小应用还好，但是做大了就不好管理了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>,[]);app.service(<span class="string">'MyService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//service code&#125;);app.controller('MyCtrl', function($scope, MyService)&#123;</span></span><br><span class="line">    <span class="comment">//controller code&#125;);</span></span><br></pre></td></tr></table></figure><br>一个比较好的办法是将相似类型的子模块分组：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> services = angular.module(<span class="string">'services'</span>,[]);services.service(<span class="string">'MyService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//service code&#125;);var controllers = angular.module('controllers',['services']);controllers.controller('MyCtrl', function($scope, MyService)&#123;</span></span><br><span class="line">    <span class="comment">//controller code&#125;);var app = angular.module('app',['controllers', 'services']);</span></span><br></pre></td></tr></table></figure><br>这个方法与上面那个方法效果差不多，但是也不很大。运用要分组的思想将使工作更容易。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sharedServicesModule = angular.module(<span class="string">'sharedServices'</span>,[]);</span><br><span class="line">sharedServices.service(<span class="string">'NetworkService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>)</span>&#123;&#125;);</span><br><span class="line"><span class="keyword">var</span> loginModule = angular.module(<span class="string">'login'</span>,[<span class="string">'sharedServices'</span>]);</span><br><span class="line">loginModule.service(<span class="string">'loginService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">NetworkService</span>)</span>&#123;&#125;);</span><br><span class="line">loginModule.controller(<span class="string">'loginCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, loginService</span>)</span>&#123;&#125;);</span><br><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>, [<span class="string">'sharedServices'</span>, <span class="string">'login'</span>]);</span><br></pre></td></tr></table></figure><br>当创建一个大的应用时，所有模块可能不会放在一页里，但是将模块根据类型进行分组将使模块的重用能力更强。</p>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>依赖注入是AngularJS最棒的模式之一。它使测试变得更加方便，也让它所依赖的对象变的更加清楚明白。AngularJS对于注入是非常灵活的。一个最简单的方式只需要为模块将依赖的名字传入函数中：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>,[]);app.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $timeout</span>)</span>&#123;</span><br><span class="line">    $timeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log($scope);</span><br><span class="line">    &#125;, <span class="number">1000</span>);&#125;);</span><br></pre></td></tr></table></figure><br>这里，很清楚的是MainCtrl依赖于$scope和$timeout。直到你准备投入生产并压缩你的代码。使用<code>UglifyJS</code>，上面的例子会变成：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app=angular.module(<span class="string">"app"</span>,[]);</span><br><span class="line">app.controller(<span class="string">"MainCtrl"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e,t</span>)</span>&#123;t(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(e)&#125;,<span class="number">1e3</span>)&#125;)</span><br></pre></td></tr></table></figure><br>现在AngularJS怎么知道<code>MainCtrl</code>依赖什么？AngularJS提供了一个非常简单的解决方案：把依赖作为一个字符串数组传递，而数组的最后一个元素是一个把所有依赖作为参数的函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'MainCtrl'</span>, [<span class="string">'$scope'</span>, <span class="string">'$timeout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $timeout</span>)</span>&#123;</span><br><span class="line">    $timeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log($scope);</span><br><span class="line">    &#125;, <span class="number">1000</span>);&#125;]);</span><br></pre></td></tr></table></figure><br>接下来在压缩的代码中AngularJS也可以知道如何找到依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">"MainCtrl"</span>,[<span class="string">"$scope"</span>,<span class="string">"$timeout"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e,t</span>)</span>&#123;t(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(e)&#125;,<span class="number">1e3</span>)&#125;])</span><br></pre></td></tr></table></figure></p>
+<h3 id="全局依赖"><a href="#全局依赖" class="headerlink" title="全局依赖"></a>全局依赖</h3><p>通常在写AngularJS应用时会有一个对象作为依赖绑定到全局作用域中。这意味着它在任何AngularJS的代码中都可用，但这打破了依赖注入模型同时带来一些问题，特别是在测试中。AngularJS把这些全局变量封装到模块中，这样它们可以像标准AngularJS模块一样被注入。<a href="http://underscorejs.org/" target="_blank" rel="noopener">Underscorejs</a>是很棒的库，它把JavaScript代码简化成了函数模式，并且它可以被转化成一个模块：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> underscore = angular.module(<span class="string">'underscore'</span>, []);underscore.factory(<span class="string">'_'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">window</span>._; <span class="comment">//Underscore must already be loaded on the page&#125;);var app = angular.module('app', ['underscore']);app.controller('MainCtrl', ['$scope', '_', function($scope, _) &#123;</span></span><br><span class="line">    init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          _.keys($scope);</span><br><span class="line">      &#125;</span><br><span class="line">     </span><br><span class="line">      init();&#125;]);</span><br></pre></td></tr></table></figure><br>它允许应用继续用AngularJS依赖注入的风格，也让underscore在测试的时候被交换出来。这或许看上去不重要，像是一个无关紧要的工作，但如果你的代码正在使用<code>use strict</code>（应该使用），那么这就变得有必要了。 </p>
+<h2 id="控制器膨胀"><a href="#控制器膨胀" class="headerlink" title="控制器膨胀"></a>控制器膨胀</h2><p>控制器是AngularJS应用中的肉和番茄。它很简单，特别是开始的时候，在控制器中放入过多的逻辑。控制器不应该做任何DOM操作或者有DOM选择器，这应该由使用<code>ngModel</code>的指令（directives）做的事。同样地，业务逻辑应该在服务（services）中，而不是 控制器。</p>
+<p>数据也应该被存在服务（services）中，除非它已经和$scope关联。服务（services）是留存于整个应用生命周期的个体，同时控制器在应用各阶段间都是暂态的。如果数据被存在控制器中，那么当它被重新实例化的时候，就需要从其他地方抓取。即使数据被存储在localStorage中，获取数据也要比从JavaScript变量中获取要慢几个数量级。</p>
+<p>AngularJS在遵从简单责任原则（SRP）时工作地最好。如果控制器是视图和模型的协调者，那么它拥有的逻辑应该被最小化。这将使得测试变的更加简单。</p>
+<h2 id="Service和Factory的区别"><a href="#Service和Factory的区别" class="headerlink" title="Service和Factory的区别"></a>Service和Factory的区别</h2><p>几乎每一个刚接触AngularJS的开发者，都会对这两个东西产生困惑。虽然它们（几乎）实现了同样的效果，但真的不是语法糖。这里是它们在AngularJS源码中的定义:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factory</span>(<span class="params">name, factoryFn</span>) </span>&#123; <span class="keyword">return</span> provider(name, &#123; <span class="attr">$get</span>: factoryFn &#125;); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">service</span>(<span class="params">name, constructor</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> factory(name, [<span class="string">'$injector'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$injector</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> $injector.instantiate(<span class="keyword">constructor</span>);</span><br><span class="line">    &#125;]);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><br>从源码上看显然service函数只是调用factory函数，然后factory函数再调用provider函数。事实上，value、constant和decorator也是AngularJS提供的对provider的封装，但对它们使用场景不会有这种困惑，并且文档描述也非常清晰。</p>
+<p>那么Service仅仅是单纯的调用了一次factory函数吗？重点在<code>$injector.instantiate</code>中。在这个函数里service会接收一个由$injector使用new关键字去实例化的一个构造器对象。下面是完成同样功能的一个service和一个factory。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>,[]);</span><br><span class="line"></span><br><span class="line">app.service(<span class="string">'helloWorldService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello World"</span>;</span><br><span class="line">    &#125;;&#125;);</span><br><span class="line"></span><br><span class="line">app.factory(<span class="string">'helloWorldFactory'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"Hello World"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;&#125;);</span><br></pre></td></tr></table></figure><br>当helloWorldService或者helloWorldFactory中的任何一个注入到controller里面，他们都有一个返回字符串”Hello World”的名称为hello方法。这个service的构造函数只在声明时被实例化一次，并且在这个factory对象每次被注入时各种互相引用，但这个factory还是只是被实例化了一次。<strong><em>所有的 providers 都是单例的。</em></strong></p>
+<p>既然都完成同样的功能，为什么会有这两种格式存在？factory比service略微更灵活一些，因为它们可以使用new关键字返回函数（原文：Factories offer slightly more flexibility than services because they can return functions which can then be new’d）。在其他地方，从面向对象编程的工厂模式来说。一个factory可以是一个用于创建其他对象的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.factory(<span class="string">'helloFactory'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">     </span><br><span class="line">        <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"Hello "</span> + <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>这里有一个使用了前面提到的那个service和两个factory的controller的例子。需要注意的是helloFactory返回的是一个函数，变量name的值是在对象使用new关键字的时候设置。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'helloCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, helloWorldService, helloWorldFactory, helloFactory</span>) </span>&#123;</span><br><span class="line">    init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      helloWorldService.hello(); <span class="comment">//'Hello World'</span></span><br><span class="line">     </span><br><span class="line">      helloWorldFactory.hello(); <span class="comment">//'Hello World'</span></span><br><span class="line">     </span><br><span class="line">      <span class="keyword">new</span> helloFactory(<span class="string">'Readers'</span>).hello() <span class="comment">//'Hello Readers'</span></span><br><span class="line">     </span><br><span class="line">    &#125;</span><br><span class="line">    init();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br><strong><em>在刚入门时候最好只使用services。</em></strong><br>Factory更加适用于当你在设计一个需要私有方法的类的时候使用：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.factory(<span class="string">'privateFactory'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> privateFunc = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>); <span class="comment">//reverses the name</span></span><br><span class="line">    &#125;;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        hello: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="string">"Hello "</span> + privateFunc(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;&#125;);</span><br></pre></td></tr></table></figure><br>在这个例子中privateFactory含有一个不能被外部访问的私有privateFunc函数。这种使用方式services也可以实现，但是使用Factory代码结构显得更加清晰。</p>
+<h2 id="不会使用-Batarang"><a href="#不会使用-Batarang" class="headerlink" title="不会使用 Batarang"></a>不会使用 Batarang</h2><p><a href="https://chrome.google.com/webstore/detail/AngularJS-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en" target="_blank" rel="noopener">Batarang</a>是用于开发和调试AngularJS应用的一个优秀的chrome浏览器插件。Batarang提供了模型浏览，可以查看Angular内部哪些模型已经绑定到作用域（scopes）。可以用于需要在运行时查看指令中的隔离作用域（isolate scopes）绑定的值。Batarang还提供了依赖关系图。 对于引入一个未测试的代码库， 这个工具可以快速确定哪些services应该得到更多的关注。</p>
+<p>最后，Batarang提供了性能分析。AngularJS虽然是高性能开箱即用，但是随着应用自定义指令和复杂的业务逻辑的增长，有时候会感到页面不够流畅。使用Batarang的性能分析工具可以很方便的查看哪些functions在<code>digest</code>周期中占用了更多的时间。这个工具还可以显示出整个监控树（full watch tree），当页面有太多的监控器（watch）时，这个功能就显得有用了。</p>
+<h2 id="太多的watchers"><a href="#太多的watchers" class="headerlink" title="太多的watchers"></a>太多的watchers</h2><p>正如上文中提到的，在外部AngularJS是很不错的。因为在一个循环消化中需要进行dirty检查，一旦watcher的数目超过2000，循环会出现很明显的问题。（2000仅是一个参考数，在1.3版本中AngularJS对循环消化有更为严谨的控制，关于这个<a href="http://www.aaron-gray.com/delaying-the-digest-cycle-in-AngularJS/" target="_blank" rel="noopener">Aaron Graye</a>有较为详细的叙述）</p>
+<p>这个IIFE（快速响应函数）可输出当前本页中的watcher的数目，只需将其复制到console即可查看详情。IIFE的来源跟Jared关于<a href="http://stackoverflow.com/questions/18499909/how-to-count-total-number-of-watches-on-a-page" target="_blank" rel="noopener">StackOverflow</a>的回答是类似的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</span><br><span class="line">    <span class="keyword">var</span> watchers = [];</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</span><br><span class="line">            angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</span><br><span class="line">                watchers.push(watcher);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">     </span><br><span class="line">        angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</span><br><span class="line">            f($(childElement));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">     </span><br><span class="line">    f(root);</span><br><span class="line">     </span><br><span class="line">    <span class="built_in">console</span>.log(watchers.length);&#125;)();</span><br></pre></td></tr></table></figure><br>使用这个，可以从Batarang的效率方面来决定watcher及watch tree的数目，可以看到在哪些地方顾在或哪些地方没有改变的数据有一个watch。当有数据没有变化时，但在Angular中又想让它成为模板，可以考虑使用<a href="https://github.com/Pasvaz/bindonce">bindonce</a>。Bindonce在Angular中仅是一个可能使用模板的指令，但没有增加watch的数目。</p>
+<h2 id="审视-scope"><a href="#审视-scope" class="headerlink" title="审视$scope"></a>审视$scope</h2><p>JavaScript的基于原型的继承和基于类的继承在一些细微的方面是不同的。通常这不是问题，但是差别往往会在使用$scope时出现。在AngularJS中每一个$scope都从它的父$scope继承过来，最高层是<code>$rootScope</code>。（$scope在指令中表现的有些不同，指令中的隔离作用域仅继承那些显式声明的属性。）</p>
+<p>从父级那里分享数据对于原型继承来说并不重要。不过如果不小心的话，会遮蔽父级$scope的属性。我们想在导航栏上呈现一个用户名，然后进入登陆表单。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"navCtrl"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"loginCtrl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"user"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><br>考你下：当用户在设置了ngModel的文本框中输入了值，哪个模板会被更新？是navCtrl，loginCtrl还是两者？</p>
+<p>如果你选loginCtrl，那么你可能对原型继承的机理比较了解了。当寻找字面值时，原型链并没有被涉及。如果navCtrl要被更新的话，那么查找原型链是必要的。当一个值时对象的时候就会发生这些。（记住在JavaScript中，函数、数组合对象都算作对象）所以想要获得期望的效果就需要在navCtrl上创建一个对象可以被loginCtrl引用。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"navCtrl"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"loginCtrl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"user.name"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><br>现在既然user是一个对象了，原型链会被考虑进去，navCtrl的模板和$scope也会随着loginCtrl更新。<br>这可能看上去像一个设计好的例子，但当涉及到像ngRepeat那样会创建子$scope的时候问题就会出现。</p>
+<h2 id="手工测试"><a href="#手工测试" class="headerlink" title="手工测试"></a>手工测试</h2><p>虽然测试驱动开发可能不是每一个开发者都喜欢的开发方式，不过每次开发者去检查他们的代码是否工作或开始砸东西时，他们正在做手工测试。</p>
+<p>没有理由不去测试一个AngularJS应用。AngularJS从一开始就是被设计地易于测试的。依赖注入和<code>ngMock</code>模块就是证据。核心团队开发了一些工具来讲测试带到另一个级别。</p>
+<h3 id="Protractor"><a href="#Protractor" class="headerlink" title="Protractor"></a>Protractor</h3><p>单元测试是一组测试集的基本元素，但随着应用复杂性的提高，集成测试会引出更多实际问题。幸运地是AngularJS核心团队提供了必要的工具。“我们构建了Protractor，一个端对端的测试运行工具，模拟用户交互，帮助你验证你的Angular应用的运行状况。”</p>
+<p>Protractor使用Jasmine测试框架来定义测试。Protractor为不同的页面交互提供一套健壮的API。<br>有其他的端对端工具，不过Protractor有着自己的优势，它知道怎么和AngularJS的代码一起运行，特别是面临$digest循环的时候。</p>
+<h3 id="Karma"><a href="#Karma" class="headerlink" title="Karma"></a>Karma</h3><p>一旦使用Protractor写好了集成测试，测试需要被运行起来。等待测试运行特别是集成测试，会让开发者感到沮丧。AngularJS核心团队也感到了这个痛苦并开发了<a href="http://karma-runner.github.io/0.12/index.html" target="_blank" rel="noopener">Karma</a>。</p>
+<p>Karma是一个JavaScript测试运行工具，可以帮助你关闭反馈循环。Karma可以在特定的文件被修改时运行测试，它也可以在不同的浏览器上并行测试。不同的设备可以指向Karma服务器来覆盖实际场景。</p>
+<h2 id="jQuery的使用"><a href="#jQuery的使用" class="headerlink" title="jQuery的使用"></a>jQuery的使用</h2><p>jQuery是个很不错的类库，它将跨平台开发标准化，在现代网页开发中具有很重要的地位。虽然jQuery拥有许多强大的功能，但是他的设计理念却与AngularJS大相径庭。</p>
+<p>AngularJS是用来开发应用框架的，jQuery则是一个用来简化HTML文档对象遍历和操作，事件处理，动画以及<code>Ajax</code>使用的类库而已，这是它们俩在本质上的区别。AngularJS侧重点在于应用的架构，而非仅仅是补充HTML网页的功能。如文档所述，AngularJS可以让你根据应用的需要对HTML进一步扩展。所以，如果想要深入的了解AngularJS应用开发，<strong><em>就不应该再继续抱着jQuery的大腿</em></strong>，jQuery只会把程序员的思维方式限制在现有的HTML标准里头。</p>
+<p>DOM操作应该出现在指令中，但这并不意味着一定要使用jQuery包装集。在使用jQuery前要考虑到一些功能AngularJS已经提供了。指令建立于相互之间，并可以创建有用的工具。总有一天，使用jQuery库是必要的，不过从一开始就引入它无疑是一个错误。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>AngularJS是一个很不错的框架，并且和它的社区一起发展着。符合习惯的AngularJS仍旧是一个正在发展的概念，但希望以上这些对于规划一个AngularJS应用时会出现的陷阱可以被避免。</p>
+<p><a href="http://www.oschina.net/translate/top-10-mistakes-angularjs-developers-make" target="_blank" rel="noopener">转载自http://www.oschina.net/translate/top-10-mistakes-angularjs-developers-make</a><br><a href="https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make" target="_blank" rel="noopener">英文原文地址https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/16/SVN服务器及客户端配置/" rel="next" title="SVN服务器及客户端配置">
+                <i class="fa fa-chevron-left"></i> SVN服务器及客户端配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/08/JavaScript提升机制/" rel="prev" title="JavaScript提升机制">
+                JavaScript提升机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="MeiYL">
+          <p class="site-author-name" itemprop="name">MeiYL</p>
+           
+              <p class="site-description motion-element" itemprop="description">一本正经地胡说八道</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/meior" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://stackoverflow.com/users/5554329/meiyl" target="_blank" title="Stack">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                    
+                      Stack
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/yl.mei.7" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/MeiYLon" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiao-bu-lai" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://thewangcj.top" title="thewangcj" target="_blank">thewangcj</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC目录结构"><span class="nav-number">1.</span> <span class="nav-text">MVC目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块分组"><span class="nav-number">2.</span> <span class="nav-text">模块分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局依赖"><span class="nav-number">3.1.</span> <span class="nav-text">全局依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器膨胀"><span class="nav-number">4.</span> <span class="nav-text">控制器膨胀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service和Factory的区别"><span class="nav-number">5.</span> <span class="nav-text">Service和Factory的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不会使用-Batarang"><span class="nav-number">6.</span> <span class="nav-text">不会使用 Batarang</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#太多的watchers"><span class="nav-number">7.</span> <span class="nav-text">太多的watchers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审视-scope"><span class="nav-number">8.</span> <span class="nav-text">审视$scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手工测试"><span class="nav-number">9.</span> <span class="nav-text">手工测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Protractor"><span class="nav-number">9.1.</span> <span class="nav-text">Protractor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Karma"><span class="nav-number">9.2.</span> <span class="nav-text">Karma</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery的使用"><span class="nav-number">10.</span> <span class="nav-text">jQuery的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 &mdash; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MeiYL</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://meior.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/meior/2015/11/28/AngularJS开发者最常犯的10个错误/';
+          this.page.identifier = '2015/11/28/AngularJS开发者最常犯的10个错误/';
+          this.page.title = '[转]AngularJS开发者最常犯的10个错误';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://meior.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("gxOM5OI4NMN2SsyORXWQI1aU-gzGzoHsz", "3xpYa4u0plAVzCONXCB1gm8q");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

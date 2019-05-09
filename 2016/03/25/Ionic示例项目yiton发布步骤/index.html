@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Ionic,Android,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="框架简介Ionic是一款基于Node.js的跨平台移动App开发解决方案，使用Sass、AngularJS构建App页面，内部提供了成熟的UI组件。得益于AngularJS的双向数据绑定，前台页面的展示与业务逻辑很容易实现和控制。同时Cordova通过ngCordova插件为其提供了底层API支持，如GPS、相机、文件系统等。对于前端开发者来说，能用自己熟知的JavaScript、HTML、CSS">
+<meta name="keywords" content="Ionic,Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ionic示例项目yiton发布步骤">
+<meta property="og:url" content="https://github.com/meior/2016/03/25/Ionic示例项目yiton发布步骤/index.html">
+<meta property="og:site_name" content="MeiYL&#39;s Blog">
+<meta property="og:description" content="框架简介Ionic是一款基于Node.js的跨平台移动App开发解决方案，使用Sass、AngularJS构建App页面，内部提供了成熟的UI组件。得益于AngularJS的双向数据绑定，前台页面的展示与业务逻辑很容易实现和控制。同时Cordova通过ngCordova插件为其提供了底层API支持，如GPS、相机、文件系统等。对于前端开发者来说，能用自己熟知的JavaScript、HTML、CSS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic1.PNG">
+<meta property="og:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic2.PNG">
+<meta property="og:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic3.PNG">
+<meta property="og:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic4.PNG">
+<meta property="og:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic5.PNG">
+<meta property="og:updated_time" content="2019-05-09T08:27:17.625Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ionic示例项目yiton发布步骤">
+<meta name="twitter:description" content="框架简介Ionic是一款基于Node.js的跨平台移动App开发解决方案，使用Sass、AngularJS构建App页面，内部提供了成熟的UI组件。得益于AngularJS的双向数据绑定，前台页面的展示与业务逻辑很容易实现和控制。同时Cordova通过ngCordova插件为其提供了底层API支持，如GPS、相机、文件系统等。对于前端开发者来说，能用自己熟知的JavaScript、HTML、CSS">
+<meta name="twitter:image" content="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/meior/2016/03/25/Ionic示例项目yiton发布步骤/">
+
+
+
+
+
+  <title>Ionic示例项目yiton发布步骤 | MeiYL's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MeiYL's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/meior/2016/03/25/Ionic示例项目yiton发布步骤/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MeiYL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MeiYL's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ionic示例项目yiton发布步骤</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-25T22:02:02-04:00">
+                2016-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/03/25/Ionic示例项目yiton发布步骤/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/25/Ionic示例项目yiton发布步骤/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/03/25/Ionic示例项目yiton发布步骤/" class="leancloud_visitors" data-flag-title="Ionic示例项目yiton发布步骤">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="框架简介"><a href="#框架简介" class="headerlink" title="框架简介"></a>框架简介</h2><p><a href="http://ionicframework.com/" target="_blank" rel="noopener">Ionic</a>是一款基于<code>Node.js</code>的跨平台移动App开发解决方案，使用<code>Sass</code>、<code>AngularJS</code>构建App页面，内部提供了成熟的UI组件。得益于AngularJS的双向数据绑定，前台页面的展示与业务逻辑很容易实现和控制。同时<a href="http://cordova.apache.org/" target="_blank" rel="noopener">Cordova</a>通过<code>ngCordova</code>插件为其提供了底层API支持，如GPS、相机、文件系统等。对于前端开发者来说，能用自己熟知的JavaScript、HTML、CSS编写移动客户端是件再酷不过的事情。快速敏捷开发以及跨平台是它的主要卖点，正所谓“一次编写，到处运行”。但是从客观角度来说，相比于Native，性能是它跨不过去的坎。不过随着Node.js和HTML5的快速发展，对于业务逻辑较简单的App，这也不失为一种不错的解决方案。</p>
+<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>该系统主要试用于高校环境，为师生提供交流平台。系统设立了三种基础角色：主任、教师、学生。实现的主要功能有：</p>
+<ul>
+<li>主任可以向指定老师和学生发送通知，并可以看到通知确认反馈情况，附带特殊情况</li>
+<li>老师同样可以向指定学生发送通知，收到反馈情况；上课时可以发布签到，查看签到情况</li>
+<li>学生主要是上课签到，通过拍照和GPS定位确定指定时间在指定的教室上指定的课程(定位精度尚有待斟酌)</li>
+<li>以上三种角色均可在线聊天</li>
+</ul>
+<p>目前该项目仅实现了Android端App，由于各种原因，服务端也并没有上线，且项目中的一些具体实现还有待考虑，所以是一个demo版本，不过基本的业务逻辑是有了。<br><a id="more"></a></p>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>系统要求：Windows 64位系统，建议用Win7 64位(说明书以win10 1511为例)。涉及的软件版本信息如下：</p>
+<ul>
+<li>JavaScript引擎 Node.js 4.4.0</li>
+<li>代码管理工具 Git 2.8.0</li>
+<li>开发工具 WebStrom 11.0.3</li>
+<li>浏览器 Chrome 49.0.2623.110 (64-bit)</li>
+<li>Java运行环境 JDK-8u66 (64-bit)</li>
+<li>安卓库管理工具 Android SDK tools R24.4.1</li>
+</ul>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><ol>
+<li>安装JavaScript引擎Node.js(默认安装)</li>
+<li>打开命令提示符，执行命令：<code>node –v</code>，出现正确版本号即安装成功</li>
+<li>安装git 2.8.0(默认安装)，在命令提示符中执行命令：<code>git --version</code>，出现正确版本号即安装成功</li>
+<li>安装开发工具WebStrom 11.0.3</li>
+<li>安装Chrome浏览器</li>
+<li>安装java运行环境JDK-8u66(64-bit)，并手动将jdk的bin目录加入系统Path环境变量中，在命令提示符中执行命令：<code>java -version</code>，出现正确版本号即安装成功</li>
+<li>安装npm包源控制插件并选择国内镜像：<ol>
+<li>在命令提示符中执行命令：<code>npm install nrm –g</code></li>
+<li>继续执行命令：<code>nrm use taobao</code> (可执行<code>nrm ls</code>列出所有镜像，执行<code>nrm test</code>测试延迟)</li>
+</ol>
+</li>
+<li>安装bower模块，执行命令：<code>npm install bower –g</code> (执行<code>bower –v</code>出现正确版本号即安装成功)</li>
+<li>安装构建工具gulp，执行命令：<code>npm install gulp –g</code> (执行<code>gulp –v</code>出现正确版本号即安装成功)</li>
+<li>安装cordova以及ionic框架，执行命令：<code>npm install cordova ionic –g</code> (分别执行<code>cordova –v</code>、<code>ionic -v</code>出现正确版本号即安装成功)</li>
+<li><p>安装android编译环境：</p>
+<ol>
+<li>安装Android SDK tools R24.4.1</li>
+<li>以管理员身份打开安装根目录中的SDK Manager</li>
+<li>由于你懂得原因需要设置代理下载。依次选择Tools-Options，在Proxy Settings填入镜像服务器设置：<ul>
+<li><code>Server：mirrors.neusoft.edu.cn</code></li>
+<li><code>Port：80</code></li>
+</ul>
+</li>
+<li>返回主界面，依次选择Packages-Reload，重新加载各模块</li>
+<li><p>安装Android SDK Platform-tools r23.1、Android SDK Build-tools r23.0.2、Android Support Repository、Android Support Library、以及Android SDK Platform的以下版本：</p>
+<ul>
+<li>Android 6.0 (API 23)</li>
+<li>Android 5.1.1 (API 22)</li>
+<li>Android 5.0.1 (API 21)</li>
+<li>Android 4.4W (API 20)</li>
+<li>Android 4.4.2 (API 19)</li>
+<li>Android 4.3 (API 18)</li>
+<li>Android 4.2.2 (API 17)</li>
+</ul>
+<p>一般只需要安装最新版本即可，由于代理网速不错且不在意那一两百兆空间，决议选择全装(强迫症泛滥)。</p>
+</li>
+<li>编辑环境变量：<ol>
+<li>新建用户变量ANDROID_HOME，指向sdk tools根目录</li>
+<li>在用户PATH变量中添加如下值：<ul>
+<li>%ANDROID_HOME%\tools</li>
+<li>%ANDROID_HOME%\platform-tools</li>
+<li>%ANDROID_HOME%\build-tools</li>
+</ul>
+</li>
+<li>在系统Path变量中加入platform-tools、tools的目录</li>
+<li>可通过<code>adb version</code>命令检查Android SDK环境是否配好</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><ol>
+<li>下载yiton示例程序并执行以下命令：<ol>
+<li>进入项目目录：<code>cd yiton</code></li>
+<li>添加android平台支持：<code>ionic platform add android</code></li>
+<li>编译成apk文件：<ul>
+<li><code>ionic build android</code></li>
+<li>会下载<a href="http://services.gradle.org/distributions" target="_blank" rel="noopener">http://services.gradle.org/distributions</a>编译包，网速可能不佳，需耐心等待</li>
+<li>生成的Apk安装包位于<code>platforms\android\build\outputs\apk</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>浏览器调试：<ul>
+<li><code>ionic serve</code></li>
+<li>如果启动顺利则说明ionic环境搭建成功</li>
+<li>ionic服务启动后，会自动调用默认浏览器访问<a href="http://localhost:8100/" target="_blank" rel="noopener">http://localhost:8100/</a></li>
+<li>按F12进入开发者控制台点击<code>Toggle device toolbar</code>，将调试设备改为手机，可自行调节分辨率</li>
+</ul>
+</li>
+<li>模拟器调试：<ul>
+<li>这里我们使用Genymotion，注意将ADB改为本地安装的Android SDK Tools</li>
+<li>使用<code>ionic run android</code>即可将App安装到Genymotion模拟器</li>
+<li>如果需要实时调试，比如打印出AngularJS中<code>console.log()</code>方法的结果，则需要开启log功能，在控制台实时打印。命令如下：<code>ionic run android -l -c -s</code> (ionic run android -livereload -consolelogs -serverlogs)</li>
+</ul>
+</li>
+<li>真机调试：<ol>
+<li>在安卓手机上打开”usb调试模式”</li>
+<li>通过usb数据线连接至电脑</li>
+<li>执行命令：<code>adb devices</code>，确保该机已成功连接至电脑</li>
+<li>执行命令：<code>ionic run android</code>，即可在该机上安装并自动运行App</li>
+</ol>
+</li>
+</ol>
+<h2 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h2><p>以下展示App主要界面截图，运行环境为Chrome DevTools的Nexus 5X设备。<br><img src="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic1.PNG" alt="运行效果1"><br><img src="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic2.PNG" alt="运行效果2"><br><img src="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic3.PNG" alt="运行效果3"><br><img src="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic4.PNG" alt="运行效果4"><br><img src="http://7xs1tt.com1.z0.glb.clouddn.com/blog/Ionic%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AEyiton%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4/pic5.PNG" alt="运行效果5"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ionic/" rel="tag"># Ionic</a>
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/12/剑指offer-数值的整数次方/" rel="next" title="剑指offer-数值的整数次方">
+                <i class="fa fa-chevron-left"></i> 剑指offer-数值的整数次方
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/10/博客成功迁移/" rel="prev" title="博客成功迁移">
+                博客成功迁移 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="MeiYL">
+          <p class="site-author-name" itemprop="name">MeiYL</p>
+           
+              <p class="site-description motion-element" itemprop="description">一本正经地胡说八道</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/meior" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://stackoverflow.com/users/5554329/meiyl" target="_blank" title="Stack">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                    
+                      Stack
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/yl.mei.7" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/MeiYLon" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiao-bu-lai" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://thewangcj.top" title="thewangcj" target="_blank">thewangcj</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架简介"><span class="nav-number">1.</span> <span class="nav-text">框架简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目简介"><span class="nav-number">2.</span> <span class="nav-text">项目简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境说明"><span class="nav-number">3.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤"><span class="nav-number">4.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目配置"><span class="nav-number">5.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行截图"><span class="nav-number">6.</span> <span class="nav-text">运行截图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 &mdash; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MeiYL</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://meior.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/meior/2016/03/25/Ionic示例项目yiton发布步骤/';
+          this.page.identifier = '2016/03/25/Ionic示例项目yiton发布步骤/';
+          this.page.title = 'Ionic示例项目yiton发布步骤';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://meior.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("gxOM5OI4NMN2SsyORXWQI1aU-gzGzoHsz", "3xpYa4u0plAVzCONXCB1gm8q");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

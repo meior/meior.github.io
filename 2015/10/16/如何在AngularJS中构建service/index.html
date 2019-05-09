@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="AngularJS,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="在AngularJS里面，services作为单例对象在需要到的时候被创建，只有在应用生命周期结束的时候(关闭浏览器)才会被清除。而controllers在不需要的时候就会被销毁了。这就是为什么使用controllers在应用里面传递数据不可靠的原因，特别是使用routing的时候。就是说services在应用的controllers、 方法、数据之前起到了很关键的作用。 现在我们开始看怎么创建s">
+<meta name="keywords" content="AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转]如何在AngularJS中构建service">
+<meta property="og:url" content="https://github.com/meior/2015/10/16/如何在AngularJS中构建service/index.html">
+<meta property="og:site_name" content="MeiYL&#39;s Blog">
+<meta property="og:description" content="在AngularJS里面，services作为单例对象在需要到的时候被创建，只有在应用生命周期结束的时候(关闭浏览器)才会被清除。而controllers在不需要的时候就会被销毁了。这就是为什么使用controllers在应用里面传递数据不可靠的原因，特别是使用routing的时候。就是说services在应用的controllers、 方法、数据之前起到了很关键的作用。 现在我们开始看怎么创建s">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-09T08:27:17.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转]如何在AngularJS中构建service">
+<meta name="twitter:description" content="在AngularJS里面，services作为单例对象在需要到的时候被创建，只有在应用生命周期结束的时候(关闭浏览器)才会被清除。而controllers在不需要的时候就会被销毁了。这就是为什么使用controllers在应用里面传递数据不可靠的原因，特别是使用routing的时候。就是说services在应用的controllers、 方法、数据之前起到了很关键的作用。 现在我们开始看怎么创建s">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/meior/2015/10/16/如何在AngularJS中构建service/">
+
+
+
+
+
+  <title>[转]如何在AngularJS中构建service | MeiYL's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MeiYL's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/meior/2015/10/16/如何在AngularJS中构建service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MeiYL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MeiYL's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[转]如何在AngularJS中构建service</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-16T12:50:45-04:00">
+                2015-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/10/16/如何在AngularJS中构建service/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/16/如何在AngularJS中构建service/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/10/16/如何在AngularJS中构建service/" class="leancloud_visitors" data-flag-title="[转]如何在AngularJS中构建service">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在AngularJS里面，<code>services</code>作为单例对象在需要到的时候被创建，只有在应用生命周期结束的时候(关闭浏览器)才会被清除。而<code>controllers</code>在不需要的时候就会被销毁了。这就是为什么使用controllers在应用里面传递数据不可靠的原因，特别是使用routing的时候。就是说services在应用的controllers、 方法、数据之前起到了很关键的作用。</p>
+<p>现在我们开始看怎么创建service。每个方法我们都会看到下面两个一样的参数：</p>
+<ul>
+<li>name-我们要定义的service的名字；</li>
+<li>function-service方法；<br>他们都创建了相同的底层对象类型。实例化后，他们都创建了一个service，这些对象没有什么功能上的差别。</li>
+</ul>
+<h2 id="factory"><a href="#factory" class="headerlink" title="factory()"></a>factory()</h2><p>AngularJS里面创建service最简单的方式是使用factory()方法。factory()让我们通过返回一个包含service方法和数据的对象来定义一个service。在service方法里面我们可以注入services，比如<code>$http</code>和<code>$q</code>等。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp.services'</span>)</span><br><span class="line">.factory(<span class="string">'User'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123; <span class="comment">// injectables go here</span></span><br><span class="line">  <span class="keyword">var</span> backendUrl = <span class="string">"http://localhost:3000"</span>;  <span class="keyword">var</span> service = &#123;    <span class="comment">// our factory definition</span></span><br><span class="line">    user: &#123;&#125;,</span><br><span class="line">    setName: <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123; </span><br><span class="line">      service.user[<span class="string">'name'</span>] = newName; </span><br><span class="line">    &#125;,</span><br><span class="line">    setEmail: <span class="function"><span class="keyword">function</span>(<span class="params">newEmail</span>) </span>&#123;</span><br><span class="line">      service.user[<span class="string">'email'</span>] = newEmail;</span><br><span class="line">    &#125;,</span><br><span class="line">    save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> $http.post(backendUrl + <span class="string">'/users'</span>, &#123;</span><br><span class="line">        user: service.user</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;  <span class="keyword">return</span> service;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="在应用里面使用factory-方法"><a href="#在应用里面使用factory-方法" class="headerlink" title="在应用里面使用factory()方法"></a>在应用里面使用factory()方法</h3><p>在应用里面可以很容易地使用factory ，需要到的时候简单地注入就可以了。<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, User</span>) </span>&#123;</span><br><span class="line">  $scope.saveUser = User.save;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="什么时候使用factory-方法"><a href="#什么时候使用factory-方法" class="headerlink" title="什么时候使用factory()方法"></a>什么时候使用factory()方法</h3><p>在service里面当我们仅仅需要的是一个方法和数据的集合且不需要处理复杂的逻辑的时候，factory()是一个非常不错的选择。</p>
+<p><strong><em>注意：需要使用.config()来配置service的时候不能使用factory()方法。</em></strong></p>
+<h2 id="service"><a href="#service" class="headerlink" title="service()"></a>service()</h2><p>service()通过构造函数的方式让我们创建service，我们可以使用原型模式替代javaScript原始的对象来定义service。和factory()方法一样我们也可以在函数的定义里面看到服务的注入。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp.services'</span>)</span><br><span class="line">.service(<span class="string">'User'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123; <span class="comment">// injectables go here</span></span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>; <span class="comment">// Save reference</span></span><br><span class="line">  <span class="keyword">this</span>.user = &#123;&#125;;</span><br><span class="line">  <span class="keyword">this</span>.backendUrl = <span class="string">"http://localhost:3000"</span>;</span><br><span class="line">  <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123;</span><br><span class="line">    self.user[<span class="string">'name'</span>] = newName;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.setEmail = <span class="function"><span class="keyword">function</span>(<span class="params">newEmail</span>) </span>&#123;</span><br><span class="line">    self.user[<span class="string">'email'</span>] = newEmail;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.save = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $http.post(self.backendUrl + <span class="string">'/users'</span>, &#123;</span><br><span class="line">      user: self.user</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>这里的功能和使用factory()方法的方式一样，service()方法会持有构造函数创建的对象。</p>
+<h3 id="在应用里面使用service-方法"><a href="#在应用里面使用service-方法" class="headerlink" title="在应用里面使用service()方法"></a>在应用里面使用service()方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, User</span>) </span>&#123;</span><br><span class="line">  $scope.saveUser = User.save;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="什么时候适合使用service-方法"><a href="#什么时候适合使用service-方法" class="headerlink" title="什么时候适合使用service()方法"></a>什么时候适合使用service()方法</h3><p>service()方法很适合使用在功能控制比较多的service里面。</p>
+<p><strong><em>注意：需要使用.config()来配置service的时候不能使用service()方法。</em></strong></p>
+<h2 id="provider"><a href="#provider" class="headerlink" title="provider()"></a>provider()</h2><p>provider()是创建service最底层的方式，这也是唯一一个可以使用.config()方法配置创建service的方法。不像上面提到的方法那样，我们在定义的<code>this.$get()</code>方法里面进行依赖注入。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp.services'</span>)</span><br><span class="line">.provider(<span class="string">'User'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.backendUrl = <span class="string">"http://localhost:3000"</span>;</span><br><span class="line">  <span class="keyword">this</span>.setBackendUrl = <span class="function"><span class="keyword">function</span>(<span class="params">newUrl</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (url) <span class="keyword">this</span>.backendUrl = newUrl;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.$<span class="keyword">get</span> = function($http) &#123; <span class="comment">// injectables go here</span></span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> service = &#123;</span><br><span class="line">      user: &#123;&#125;,</span><br><span class="line">      setName: <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123;</span><br><span class="line">        service.user[<span class="string">'name'</span>] = newName;</span><br><span class="line">      &#125;,</span><br><span class="line">      setEmail: <span class="function"><span class="keyword">function</span>(<span class="params">newEmail</span>) </span>&#123;</span><br><span class="line">        service.user[<span class="string">'email'</span>] = newEmail;</span><br><span class="line">      &#125;,</span><br><span class="line">      save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $http.post(self.backendUrl + <span class="string">'/users'</span>, &#123;</span><br><span class="line">          user: service.user</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> service;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="在应用里面使用provider-方法"><a href="#在应用里面使用provider-方法" class="headerlink" title="在应用里面使用provider()方法"></a>在应用里面使用provider()方法</h3><p>为了给service进行配置，我们可以将provider注入到.config()方法里面。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">.config(<span class="function"><span class="keyword">function</span>(<span class="params">UserProvider</span>) </span>&#123;</span><br><span class="line">  UserProvider.setBackendUrl(<span class="string">"http://myApiBackend.com/api"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>这样我们就可以和其他方式一样在应用里面使用这个service了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, User</span>) </span>&#123;</span><br><span class="line">  $scope.saveUser = User.save;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="什么时候使用provider-方法"><a href="#什么时候使用provider-方法" class="headerlink" title="什么时候使用provider()方法"></a>什么时候使用provider()方法</h3><ol>
+<li>当我们希望在应用开始前对service进行配置的时候就需要使用到provider()。比如，我们需要配置services在不同的部署环境里面（开发，演示，生产）使用不同的后端处理的时候就可以使用到了。</li>
+<li>当我们打算发布开源provider()也是首选创建service的方法，这样就可以使用配置的方式来配置services而不是将配置数据硬编码写到代码里面。</li>
+</ol>
+<p><a href="http://my.oschina.net/tanweijie/blog/295067" target="_blank" rel="noopener">转载自http://my.oschina.net/tanweijie/blog/295067</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/05/更换dns提高网页响应速度/" rel="next" title="更换dns提高网页响应速度">
+                <i class="fa fa-chevron-left"></i> 更换dns提高网页响应速度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/29/一波高清电脑壁纸分享/" rel="prev" title="一波高清电脑壁纸分享">
+                一波高清电脑壁纸分享 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="MeiYL">
+          <p class="site-author-name" itemprop="name">MeiYL</p>
+           
+              <p class="site-description motion-element" itemprop="description">一本正经地胡说八道</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/meior" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://stackoverflow.com/users/5554329/meiyl" target="_blank" title="Stack">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                    
+                      Stack
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/yl.mei.7" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/MeiYLon" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/xiao-bu-lai" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://thewangcj.top" title="thewangcj" target="_blank">thewangcj</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#factory"><span class="nav-number">1.</span> <span class="nav-text">factory()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在应用里面使用factory-方法"><span class="nav-number">1.1.</span> <span class="nav-text">在应用里面使用factory()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用factory-方法"><span class="nav-number">1.2.</span> <span class="nav-text">什么时候使用factory()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service"><span class="nav-number">2.</span> <span class="nav-text">service()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在应用里面使用service-方法"><span class="nav-number">2.1.</span> <span class="nav-text">在应用里面使用service()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候适合使用service-方法"><span class="nav-number">2.2.</span> <span class="nav-text">什么时候适合使用service()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#provider"><span class="nav-number">3.</span> <span class="nav-text">provider()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在应用里面使用provider-方法"><span class="nav-number">3.1.</span> <span class="nav-text">在应用里面使用provider()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用provider-方法"><span class="nav-number">3.2.</span> <span class="nav-text">什么时候使用provider()方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 &mdash; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MeiYL</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://meior.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/meior/2015/10/16/如何在AngularJS中构建service/';
+          this.page.identifier = '2015/10/16/如何在AngularJS中构建service/';
+          this.page.title = '[转]如何在AngularJS中构建service';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://meior.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("gxOM5OI4NMN2SsyORXWQI1aU-gzGzoHsz", "3xpYa4u0plAVzCONXCB1gm8q");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
