@@ -328,7 +328,7 @@ han: false
 # Disqus
 disqus:
   enable: true
-  shortname: mylcc
+  shortname: meior
   count: true
 
 # Hypercomments
